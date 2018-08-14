@@ -1,0 +1,11 @@
+.item-photos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width:200px;
+  border: solid 5px black;
+  margin: 20px;
+}
