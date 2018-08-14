@@ -10,9 +10,9 @@ function Item(name, filePath) {
 }
 Item.allItems = [];
 
-new Item('bag','img/bag.jpg');
-new Item('banana','img/banana.jpg');
-new Item('bathroom','img/bathroom.jpg');
+var item1 = new Item('bag','img/bag.jpg');
+var item2 = new Item('banana','img/banana.jpg');
+var item3= new Item('bathroom','img/bathroom.jpg');
 new Item('boots','img/boots.jpg');
 new Item('breakfast','img/breakfast.jpg');
 new Item('bubblegum','img/bubblegum.jpg');
@@ -31,30 +31,34 @@ new Item('usb','img/usb.gif');
 new Item('water-can','img/water-can.jpg');
 new Item('wine-glass','img/wine-glass.jpg');
 
-
 function displayThreeNewItems() {
   // show 3 new pictures to user
   // grab 3 items at random
-  for (randIndex === secondItemIndex || randIndex === thirdItemIndex || secondItemIndex === thirdItemIndex) {
-    var randIndex = Math.floor(Math.random() * Item.allItems.length);
-    var secondItemIndex = Math.floor(Math.random() * Item.allItems.length);
-    var thirdItemIndex = Math.floor(Math.random() * Item.allItems.length);
-  } 
-  var item1 = Item.allItems[randIndex];
-  var item2 = Item.allItems[secondItemIndex];
-  var item3 = Item.allItems[thirdItemIndex]; 
+
+  var firstRandItemIndex = Math.floor(Math.random() * Item.allItems.length);
+  do {
+    var secondRandItemIndex = Math.floor(Math.random() * Item.allItems.length);
+    var thirdRandItemIndex = Math.floor(Math.random() * Item.allItems.length);
+  } while (firstRandItemIndex === secondRandItemIndex || firstRandItemIndex === thirdRandItemIndex || secondRandItemIndex === thirdRandItemIndex);
+  
+  item1 = Item.allItems[firstRandItemIndex];
+  item2 = Item.allItems[secondRandItemIndex];
+  item3 = Item.allItems[thirdRandItemIndex]; 
   
   // change img src on the page to match the 3 new items
-  img1.src = item1.filename;
-  item1.votes++;
-  img2.src = item2.filename;
-  item2.votes++;
-  img3.src = item3.filename;
-  item3.votes++;
+  img1.src = item1.filePath;
+  item1.numberOfTimesShown++;
+  img2.src = item2.filePath;
+  item2.numberOfTimesShown++;
+  img3.src = item3.filePath;
+  item3.numberOfTimesShown++;
+
+  console.log(img1.src, img2.src, img3.src);
 }
 
 // event listeners
 // where are we listening? the images
+// select the img nodes from the document
 var img1 = document.getElementsByTagName('img')[0];
 var img2 = document.getElementsByTagName('img')[1];
 var img3 = document.getElementsByTagName('img')[2];
@@ -65,7 +69,6 @@ var numberOfClicks = 0;
 img1.addEventListener('click', function() {
   // add to votes for that item
   item1.votes++;
-
   numberOfClicks++;
   // item1.votes = item1.votes + 1;
   displayThreeNewItems();
