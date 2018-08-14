@@ -32,6 +32,7 @@ new Item('water-can','img/water-can.jpg');
 new Item('wine-glass','img/wine-glass.jpg');
 
 function displayThreeNewItems() {
+
   // show 3 new pictures to user
   // grab 3 items at random
 
@@ -40,11 +41,11 @@ function displayThreeNewItems() {
     var secondRandItemIndex = Math.floor(Math.random() * Item.allItems.length);
     var thirdRandItemIndex = Math.floor(Math.random() * Item.allItems.length);
   } while (firstRandItemIndex === secondRandItemIndex || firstRandItemIndex === thirdRandItemIndex || secondRandItemIndex === thirdRandItemIndex);
-  
+
   item1 = Item.allItems[firstRandItemIndex];
   item2 = Item.allItems[secondRandItemIndex];
-  item3 = Item.allItems[thirdRandItemIndex]; 
-  
+  item3 = Item.allItems[thirdRandItemIndex];
+
   // change img src on the page to match the 3 new items
   img1.src = item1.filePath;
   item1.numberOfTimesShown++;
@@ -64,27 +65,51 @@ var img2 = document.getElementsByTagName('img')[1];
 var img3 = document.getElementsByTagName('img')[2];
 // what are we listening for? click
 
+var maxClicks = 25;
 var numberOfClicks = 0;
 
-img1.addEventListener('click', function() {
+var addVotestoItem1 = function() {
   // add to votes for that item
   item1.votes++;
   numberOfClicks++;
   // item1.votes = item1.votes + 1;
-  displayThreeNewItems();
-});
 
-img2.addEventListener('click', function() {
-  // what should we do? 
+  if (numberOfClicks === maxClicks) {
+    console.log(Item.allItems);
+
+    document.getElementsByTagName('img')[0].removeEventListener('click', addVotestoItem1);
+  } else (displayThreeNewItems());
+};
+
+img1.addEventListener('click', addVotestoItem1);
+
+var addVotestoItem2 = function() {
   // add to votes for that item
   item2.votes++;
   numberOfClicks++;
-  displayThreeNewItems();
-});
+  // item1.votes = item1.votes + 1;
 
-img3.addEventListener('click', function() {
+  if (numberOfClicks === maxClicks) {
+    console.log(Item.allItems);
+
+    document.getElementsByTagName('img')[1].removeEventListener('click', addVotestoItem2);
+  } else (displayThreeNewItems());
+};
+
+img2.addEventListener('click', addVotestoItem2);
+
+var addVotestoItem3 = function() {
+  // add to votes for that item
   item3.votes++;
   numberOfClicks++;
-  displayThreeNewItems();
-});
+
+  if (numberOfClicks === maxClicks) {
+    console.log(Item.allItems);
+    document.getElementsByTagName('img')[2].removeEventListener('click', addVotestoItem3);
+  } else (displayThreeNewItems());
+};
+
+img3.addEventListener('click', addVotestoItem3);
+
+
 
