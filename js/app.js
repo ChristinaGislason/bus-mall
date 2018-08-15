@@ -12,26 +12,38 @@ function Item(name, filePath) {
 Item.allItems = [];
 Item.totalVotes = 0;
 
-new Item('bag', 'img/bag.jpg');
-new Item('banana', 'img/banana.jpg');
-new Item('bathroom', 'img/bathroom.jpg');
-new Item('boots', 'img/boots.jpg');
-new Item('breakfast', 'img/breakfast.jpg');
-new Item('bubblegum', 'img/bubblegum.jpg');
-new Item('chair', 'img/chair.jpg');
-new Item('cthulhu', 'img/cthulhu.jpg');
-new Item('dog-duck', 'img/dog-duck.jpg');
-new Item('dragon', 'img/dragon.jpg');
-new Item('pen', 'img/pen.jpg');
-new Item('pet-sweep', 'img/pet-sweep.jpg');
-new Item('scissors', 'img/scissors.jpg');
-new Item('shark', 'img/shark.jpg');
-new Item('sweep', 'img/sweep.png');
-new Item('tauntaun', 'img/tauntaun.jpg');
-new Item('unicorn', 'img/unicorn.jpg');
-new Item('usb', 'img/usb.gif');
-new Item('water-can', 'img/water-can.jpg');
-new Item('wine-glass', 'img/wine-glass.jpg');
+var localStorageItems = JSON.parse(localStorage.getItem('items'));
+if (localStorageItems) {
+  for (var i = 0; i < localStorageItems.length; i++) {
+    new Item(
+      localStorageItems[i].name,
+      localStorageItems[i].filePath,
+      localStorageItems[i].votes,
+      localStorageItems[i].shown,
+  );
+} else {
+  new Item('bag', 'img/bag.jpg');
+  new Item('banana', 'img/banana.jpg');
+  new Item('bathroom', 'img/bathroom.jpg');
+  new Item('boots', 'img/boots.jpg');
+  new Item('breakfast', 'img/breakfast.jpg');
+  new Item('bubblegum', 'img/bubblegum.jpg');
+  new Item('chair', 'img/chair.jpg');
+  new Item('cthulhu', 'img/cthulhu.jpg');
+  new Item('dog-duck', 'img/dog-duck.jpg');
+  new Item('dragon', 'img/dragon.jpg');
+  new Item('pen', 'img/pen.jpg');
+  new Item('pet-sweep', 'img/pet-sweep.jpg');
+  new Item('scissors', 'img/scissors.jpg');
+  new Item('shark', 'img/shark.jpg');
+  new Item('sweep', 'img/sweep.png');
+  new Item('tauntaun', 'img/tauntaun.jpg');
+  new Item('unicorn', 'img/unicorn.jpg');
+  new Item('usb', 'img/usb.gif');
+  new Item('water-can', 'img/water-can.jpg');
+  new Item('wine-glass', 'img/wine-glass.jpg');
+  }
+}
 
 var prevItem = [];
 var item1, item2, item3;
@@ -84,12 +96,12 @@ var maxClicks = 24;
 var numberOfClicks = 0;
 
 // what are we listening for? click
+// add votes to items
 var addItem1Votes = function() {
-  // add votes for item1
-
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
     displayResults();
+    localStorage.setItem('items', JSON.stringify(Item.allItems));
   } else {
     item1.votes++;
     numberOfClicks++;
@@ -104,6 +116,7 @@ var addItem2Votes = function() {
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
     displayResults();
+    localStorage.setItem('items', JSON.stringify(Item.allItems));
   } else {
     item2.votes++;
     numberOfClicks++;
@@ -117,6 +130,7 @@ var addItem3Votes = function() {
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
     displayResults();
+    localStorage.setItem('items', JSON.stringify(Item.allItems));
     //invoke function to create list
   } else {
     item3.votes++;
