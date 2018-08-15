@@ -133,9 +133,6 @@ function displayResults() {
   img2.remove();
   img3.remove();
 
-  // var votes = Item.allItems[i].votes;
-  // var shown = Item.allItems[i].shown;
-
   var results = document.querySelector('ul');
 
   for (var i = 0; i < Item.allItems.length; i++) {
@@ -147,14 +144,71 @@ function displayResults() {
     var itemResult = document.createElement('li');
     results.appendChild(itemResult);
     itemResult.innerText =
-      'Item name: '+ name + ', total votes: ' + votes + ', total times shown: ' + shown;
+      'Item name: ' +
+      name +
+      ', total votes: ' +
+      votes +
+      ', total times shown: ' +
+      shown;
   }
+
+  var namesArray = [];
+  var votesArray = [];
+
+  for (var j = 0; j < Item.allItems.length; j++) {
+    namesArray.push(Item.allItems[j].name);
+    votesArray.push(Item.allItems[j].votes);
+  }
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: namesArray,
+      datasets: [
+        {
+          label: '# of Votes',
+          data: votesArray, // these numbers seem important
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+          ],
+          borderColor: 'rgb(0,0,0)',
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+              suggestedMax: 6
+            }
+          }
+        ]
+      }
+    }
+  });
 }
-//   for (var i = 0; i < Item.allItems.length; i++){
-//     namesArray.push(Item.allItems[i].name);
-//   }
-//   var ctx = document.getElementById('myChart').msGetInputContext('2d');
-//   var myChart = new myChart(ctx, {
-//     type: 'bar'
-//   })
-// }
+

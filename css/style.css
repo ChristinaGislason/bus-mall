@@ -1,3 +1,7 @@
+body {
+  background-color: aquamarine;
+}
+
 .item-photos {
   display: flex;
   justify-content: center;
@@ -11,8 +15,14 @@ img {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: 45px;
   font-family: 'Raleway', sans-serif;
   text-align: center;
   border: 10px inset gray
+}
+
+ul {
+  font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
 }
