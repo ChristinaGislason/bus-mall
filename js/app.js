@@ -12,30 +12,30 @@ function Item(name, filePath) {
 Item.allItems = [];
 Item.totalVotes = 0;
 
-new Item('bag','img/bag.jpg');
-new Item('banana','img/banana.jpg');
-new Item('bathroom','img/bathroom.jpg');
-new Item('boots','img/boots.jpg');
-new Item('breakfast','img/breakfast.jpg');
-new Item('bubblegum','img/bubblegum.jpg');
-new Item('chair','img/chair.jpg');
-new Item('cthulhu','img/cthulhu.jpg');
-new Item('dog-duck','img/dog-duck.jpg');
-new Item('dragon','img/dragon.jpg');
-new Item('pen','img/pen.jpg');
-new Item('pet-sweep','img/pet-sweep.jpg');
-new Item('scissors','img/scissors.jpg');
-new Item('shark','img/shark.jpg');
-new Item('sweep','img/sweep.png');
-new Item('tauntaun','img/tauntaun.jpg');
-new Item('unicorn','img/unicorn.jpg');
-new Item('usb','img/usb.gif');
-new Item('water-can','img/water-can.jpg');
-new Item('wine-glass','img/wine-glass.jpg');
+new Item('bag', 'img/bag.jpg');
+new Item('banana', 'img/banana.jpg');
+new Item('bathroom', 'img/bathroom.jpg');
+new Item('boots', 'img/boots.jpg');
+new Item('breakfast', 'img/breakfast.jpg');
+new Item('bubblegum', 'img/bubblegum.jpg');
+new Item('chair', 'img/chair.jpg');
+new Item('cthulhu', 'img/cthulhu.jpg');
+new Item('dog-duck', 'img/dog-duck.jpg');
+new Item('dragon', 'img/dragon.jpg');
+new Item('pen', 'img/pen.jpg');
+new Item('pet-sweep', 'img/pet-sweep.jpg');
+new Item('scissors', 'img/scissors.jpg');
+new Item('shark', 'img/shark.jpg');
+new Item('sweep', 'img/sweep.png');
+new Item('tauntaun', 'img/tauntaun.jpg');
+new Item('unicorn', 'img/unicorn.jpg');
+new Item('usb', 'img/usb.gif');
+new Item('water-can', 'img/water-can.jpg');
+new Item('wine-glass', 'img/wine-glass.jpg');
 
 var prevItem = [];
 var item1, item2, item3;
-var shownItem =[];
+// var shownItem = [];
 
 function displayThreeNewItems() {
   // show 3 new pictures to user
@@ -57,8 +57,8 @@ function displayThreeNewItems() {
   item1 = Item.allItems[firstRandItemIndex];
   item2 = Item.allItems[secondRandItemIndex];
   item3 = Item.allItems[thirdRandItemIndex];
-  prevItem = [firstRandItemIndex,secondRandItemIndex,thirdRandItemIndex];
-  shownItem = [item1.shown, item2.shown, item3.shown];
+  prevItem = [firstRandItemIndex, secondRandItemIndex, thirdRandItemIndex];
+  // shownItem = [item1.shown, item2.shown, item3.shown];
 
   // change img src on the page to match the 3 new items
   img1.src = item1.filePath;
@@ -101,7 +101,6 @@ var addItem1Votes = function() {
 img1.addEventListener('click', addItem1Votes);
 
 var addItem2Votes = function() {
-
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
     displayResults();
@@ -115,7 +114,6 @@ var addItem2Votes = function() {
 img2.addEventListener('click', addItem2Votes);
 
 var addItem3Votes = function() {
-
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
     displayResults();
@@ -129,28 +127,29 @@ var addItem3Votes = function() {
 
 img3.addEventListener('click', addItem3Votes);
 
-// after max clicks, display results in a list 
+// after max clicks, display results in a list
 function displayResults() {
   img1.remove();
   img2.remove();
   img3.remove();
-  
-var votes = Item.allItems[i].votes;
-var shown = Item.allItems[i].shown;
 
-for (var i = 0; i<Item.allItems.length; i++) 
-  // create list for number of votes for items shown
-  var votesResults = document.createElement('ul');
-  voteResults.innerText = votes;
-  ul.appendChild(li);
-  li.appendChild(voteResults);
-  // create list for number of times items shown
-  var shownResults = document.createElement('ul');
-  voteResults.innerText = votes;
-  ul.appendChild(li);
-  li.appendChild(voteResults);
+  // var votes = Item.allItems[i].votes;
+  // var shown = Item.allItems[i].shown;
+
+  var results = document.querySelector('ul');
+
+  for (var i = 0; i < Item.allItems.length; i++) {
+    // create list for number of votes for items shown
+    var votes = Item.allItems[i].votes;
+    var shown = Item.allItems[i].shown;
+    var name = Item.allItems[i].name;
+
+    var itemResult = document.createElement('li');
+    results.appendChild(itemResult);
+    itemResult.innerText =
+      'Item name: '+ name + ', total votes: ' + votes + ', total times shown: ' + shown;
+  }
 }
-
 //   for (var i = 0; i < Item.allItems.length; i++){
 //     namesArray.push(Item.allItems[i].name);
 //   }
@@ -159,5 +158,3 @@ for (var i = 0; i<Item.allItems.length; i++)
 //     type: 'bar'
 //   })
 // }
-
-
