@@ -19,8 +19,9 @@ if (localStorageItems) {
       localStorageItems[i].name,
       localStorageItems[i].filePath,
       localStorageItems[i].votes,
-      localStorageItems[i].shown,
-  );
+      localStorageItems[i].shown
+    );
+  }
 } else {
   new Item('bag', 'img/bag.jpg');
   new Item('banana', 'img/banana.jpg');
@@ -42,7 +43,6 @@ if (localStorageItems) {
   new Item('usb', 'img/usb.gif');
   new Item('water-can', 'img/water-can.jpg');
   new Item('wine-glass', 'img/wine-glass.jpg');
-  }
 }
 
 var prevItem = [];
