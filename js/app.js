@@ -48,8 +48,8 @@ function displayThreeNewItems() {
     firstRandItemIndex === secondRandItemIndex ||
     firstRandItemIndex === thirdRandItemIndex ||
     secondRandItemIndex === thirdRandItemIndex ||
-    prevItem.includes(firstRandItemIndex) || 
-    prevItem.includes(secondRandItemIndex) || 
+    prevItem.includes(firstRandItemIndex) ||
+    prevItem.includes(secondRandItemIndex) ||
     prevItem.includes(thirdRandItemIndex)
   );
 
@@ -84,15 +84,18 @@ var numberOfClicks = 0;
 
 var addVotestoItem1 = function() {
   // add to votes for that item
-  item1.votes++;
-  numberOfClicks++;
   // item1.votes = item1.votes + 1;
 
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
 
-    document.getElementsByTagName('img')[0].removeEventListener('click', addVotestoItem1);
-  } else (displayThreeNewItems());
+    //document.getElementsByTagName('img')[0].removeEventListener('click', addVotestoItem1);
+    displayResults();
+  } else {
+    item3.votes++;
+    numberOfClicks++;
+    displayThreeNewItems();
+  }
 };
 
 img1.addEventListener('click', addVotestoItem1);
@@ -105,28 +108,43 @@ var addVotestoItem2 = function() {
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
 
-    document.getElementsByTagName('img')[1].removeEventListener('click', addVotestoItem2);
-  } else (displayThreeNewItems());
+    //document.getElementsByTagName('img')[1].removeEventListener('click', addVotestoItem2);
+    displayResults();
+  } else {
+    item3.votes++;
+    numberOfClicks++;
+    displayThreeNewItems();
+  }
 };
 
 img2.addEventListener('click', addVotestoItem2);
 
 var addVotestoItem3 = function() {
-  item3.votes++;
-  numberOfClicks++;
 
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
-    document.getElementsByTagName('img')[2].removeEventListener('click', addVotestoItem3);
-  } else (displayThreeNewItems());
+    //document.getElementsByTagName('img')[2].removeEventListener('click', addVotestoItem3);
+    displayResults();
+    //invoke function to create list
+  } else {
+    item3.votes++;
+    numberOfClicks++;
+    displayThreeNewItems();
+  }
 };
 
 img3.addEventListener('click', addVotestoItem3);
 
-// function displayResults() {
-//   item1.remove();
-//   item2.remove();
-//   item3.remove();
+
+
+//function return
+
+
+function displayResults() {
+  img1.remove();
+  img2.remove();
+  img3.remove();
+}
 
 //   for (var i = 0; i < Item.allItems.length; i++){
 //     namesArray.push(Item.allItems[i].name);

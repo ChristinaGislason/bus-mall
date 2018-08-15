@@ -9,3 +9,10 @@ img {
   border: solid 5px black;
   margin: 20px;
 }
+
+h1 {
+  font-size: 40px;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+  border: 10px inset gray
+}
