@@ -35,10 +35,11 @@ new Item('wine-glass','img/wine-glass.jpg');
 
 var prevItem = [];
 var item1, item2, item3;
+var shownItem =[];
 
 function displayThreeNewItems() {
   // show 3 new pictures to user
-  // grab 3 items at random
+  // grab 3 items at random that do not duplicate
 
   do {
     var firstRandItemIndex = Math.floor(Math.random() * Item.allItems.length);
@@ -57,6 +58,7 @@ function displayThreeNewItems() {
   item2 = Item.allItems[secondRandItemIndex];
   item3 = Item.allItems[thirdRandItemIndex];
   prevItem = [firstRandItemIndex,secondRandItemIndex,thirdRandItemIndex];
+  shownItem = [item1.shown, item2.shown, item3.shown];
 
   // change img src on the page to match the 3 new items
   img1.src = item1.filePath;
@@ -75,55 +77,47 @@ function displayThreeNewItems() {
 var img1 = document.getElementsByTagName('img')[0];
 var img2 = document.getElementsByTagName('img')[1];
 var img3 = document.getElementsByTagName('img')[2];
-// what are we listening for? click
 
 displayThreeNewItems();
 
-var maxClicks = 25;
+var maxClicks = 24;
 var numberOfClicks = 0;
 
-var addVotestoItem1 = function() {
-  // add to votes for that item
-  // item1.votes = item1.votes + 1;
+// what are we listening for? click
+var addItem1Votes = function() {
+  // add votes for item1
 
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
-
-    //document.getElementsByTagName('img')[0].removeEventListener('click', addVotestoItem1);
     displayResults();
   } else {
-    item3.votes++;
+    item1.votes++;
     numberOfClicks++;
     displayThreeNewItems();
   }
 };
 
-img1.addEventListener('click', addVotestoItem1);
+// add event listener and event handler
+img1.addEventListener('click', addItem1Votes);
 
-var addVotestoItem2 = function() {
-  item2.votes++;
-  numberOfClicks++;
-  // item1.votes = item1.votes + 1;
+var addItem2Votes = function() {
 
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
-
-    //document.getElementsByTagName('img')[1].removeEventListener('click', addVotestoItem2);
     displayResults();
   } else {
-    item3.votes++;
+    item2.votes++;
     numberOfClicks++;
     displayThreeNewItems();
   }
 };
 
-img2.addEventListener('click', addVotestoItem2);
+img2.addEventListener('click', addItem2Votes);
 
-var addVotestoItem3 = function() {
+var addItem3Votes = function() {
 
   if (numberOfClicks === maxClicks) {
     console.log(Item.allItems);
-    //document.getElementsByTagName('img')[2].removeEventListener('click', addVotestoItem3);
     displayResults();
     //invoke function to create list
   } else {
@@ -133,17 +127,28 @@ var addVotestoItem3 = function() {
   }
 };
 
-img3.addEventListener('click', addVotestoItem3);
+img3.addEventListener('click', addItem3Votes);
 
-
-
-//function return
-
-
+// after max clicks, display results in a list 
 function displayResults() {
   img1.remove();
   img2.remove();
   img3.remove();
+  
+var votes = Item.allItems[i].votes;
+var shown = Item.allItems[i].shown;
+
+for (var i = 0; i<Item.allItems.length; i++) 
+  // create list for number of votes for items shown
+  var votesResults = document.createElement('ul');
+  voteResults.innerText = votes;
+  ul.appendChild(li);
+  li.appendChild(voteResults);
+  // create list for number of times items shown
+  var shownResults = document.createElement('ul');
+  voteResults.innerText = votes;
+  ul.appendChild(li);
+  li.appendChild(voteResults);
 }
 
 //   for (var i = 0; i < Item.allItems.length; i++){
