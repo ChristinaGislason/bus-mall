@@ -137,9 +137,9 @@ function displayResults() {
 
   for (var i = 0; i < Item.allItems.length; i++) {
     // create list for number of votes for items shown
+    var name = Item.allItems[i].name;
     var votes = Item.allItems[i].votes;
     var shown = Item.allItems[i].shown;
-    var name = Item.allItems[i].name;
 
     var itemResult = document.createElement('li');
     results.appendChild(itemResult);
@@ -160,8 +160,9 @@ function displayResults() {
     votesArray.push(Item.allItems[j].votes);
   }
 
+  // add bar chart displaying total votes
   var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
+  new Chart(ctx, {
     type: 'bar',
     data: {
       labels: namesArray,
@@ -190,7 +191,7 @@ function displayResults() {
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
           ],
           borderColor: 'rgb(0,0,0)',
           borderWidth: 1
@@ -211,4 +212,3 @@ function displayResults() {
     }
   });
 }
-
