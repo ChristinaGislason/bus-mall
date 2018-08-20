@@ -1,11 +1,18 @@
 'use strict';
 
 //constructor for items
-function Item(name, filePath) {
+//votes and shown are optional parameters
+function Item(name, filePath, votes, shown) {
   this.name = name;
   this.filePath = filePath;
-  this.votes = 0;
-  this.shown = 0;
+  this.votes = votes || 0;
+  // equivalent to:
+  // if (votes === undefined) {
+  //   this.votes = 0;
+  // } else {
+  //   this.votes = votes;
+  // }
+  this.shown = shown || 0;
   Item.allItems.push(this);
 }
 //place all instances of items in array
@@ -13,6 +20,7 @@ Item.allItems = [];
 Item.totalVotes = 0;
 
 var localStorageItems = JSON.parse(localStorage.getItem('items'));
+console.log(localStorageItems);
 if (localStorageItems) {
   for (var i = 0; i < localStorageItems.length; i++) {
     new Item(
